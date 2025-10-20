@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Handwriter Studio App</title>
+  <meta name="description" content="Generate handwriting practice sheets for letters, words, and grids with instant PDF export.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Patrick+Hand:wght@400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900">
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2" aria-label="Back to Landing">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white font-black">H</span>
+        <span class="font-extrabold tracking-tight">Handwriter Studio</span>
+      </a>
+      <div class="flex items-center gap-2">
+        <button id="btn-save" class="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold bg-white border border-slate-200 hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-200 whitespace-nowrap">Save Settings</button>
+        <button id="btn-export" class="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold bg-teal-600 text-white hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-200 whitespace-nowrap">Export PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <aside class="lg:col-span-4 xl:col-span-3">
+        <form id="controls" class="space-y-6 bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm" aria-labelledby="controls-heading">
+          <h2 id="controls-heading" class="text-lg font-bold">Sheet Settings</h2>
+
+          <fieldset class="space-y-3">
+            <legend class="text-sm font-semibold text-slate-700">Content Type</legend>
+            <div class="flex gap-2 flex-wrap">
+              <label class="content-radio"><input type="radio" name="mode" value="letters" checked> Letters</label>
+              <label class="content-radio"><input type="radio" name="mode" value="words"> Words</label>
+              <label class="content-radio"><input type="radio" name="mode" value="blank"> Blank/Grid</label>
+            </div>
+          </fieldset>
+
+          <div class="grid grid-cols-2 gap-3">
+            <label class="form-label">Paper
+              <select name="paper" class="form-input">
+                <option value="letter">US Letter 8.5x11</option>
+                <option value="a4">A4 210x297 mm</option>
+              </select>
+            </label>
+            <label class="form-label">Orientation
+              <select name="orientation" class="form-input">
+                <option value="portrait">Portrait</option>
+                <option value="landscape">Landscape</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <label class="form-label">Margins (mm)
+              <input type="range" name="margins" min="5" max="25" step="1" value="12" class="w-full">
+              <span class="hint" data-bind="margins">12</span>
+            </label>
+            <label class="form-label">Line height (px)
+              <input type="range" name="lineHeight" min="52" max="120" step="2" value="72" class="w-full">
+              <span class="hint" data-bind="lineHeight">72</span>
+            </label>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <label class="form-label">Font size (px)
+              <input type="range" name="fontSize" min="32" max="96" step="1" value="44" class="w-full">
+              <span class="hint" data-bind="fontSize">44</span>
+            </label>
+            <label class="form-label">Repeat per row
+              <input type="number" name="repeat" min="1" max="20" value="8" class="form-input">
+            </label>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <label class="form-label">Guides
+              <select name="guides" class="form-input">
+                <option value="primary">Primary 3-line</option>
+                <option value="grid">Square grid</option>
+              </select>
+            </label>
+            <label class="form-label">Trace style
+              <select name="traceStyle" class="form-input">
+                <option value="dotted">Dotted outline</option>
+                <option value="outline">Solid outline</option>
+                <option value="ghost">Ghost fill</option>
+              </select>
+            </label>
+          </div>
+
+          <div data-section="letters" class="space-y-3">
+            <h3 class="text-sm font-semibold text-slate-700">Letters</h3>
+            <div class="grid grid-cols-6 gap-1.5" aria-label="Quick letters">
+              <button type="button" class="key" data-key="clear">CLR</button>
+              <button type="button" class="key" data-key="upper">A-Z</button>
+              <button type="button" class="key" data-key="lower">a-z</button>
+              <button type="button" class="key" data-key="vowels">V</button>
+              <button type="button" class="key" data-key="consonants">C</button>
+              <button type="button" class="key" data-key="abc">abc</button>
+            </div>
+            <label class="form-label">Letters to practice
+              <input type="text" name="letters" value="abc" class="form-input" placeholder="Type letters like: abcdef">
+            </label>
+            <label class="inline-flex items-center gap-2 select-none">
+              <input type="checkbox" name="uppercase" class="form-checkbox">
+              <span class="text-sm">Uppercase</span>
+            </label>
+          </div>
+
+          <div data-section="words" class="space-y-3 hidden">
+            <h3 class="text-sm font-semibold text-slate-700">Words</h3>
+            <label class="form-label">One per line
+              <textarea name="words" rows="4" class="form-input" placeholder="cat\ndog\nbird"></textarea>
+            </label>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <label class="form-label">Preview zoom
+              <input type="range" name="zoom" min="50" max="120" step="1" value="80" class="w-full">
+              <span class="hint" data-bind="zoom">80%</span>
+            </label>
+            <label class="form-label">Ink color
+              <select name="ink" class="form-input">
+                <option value="#0f172a">Deep Slate</option>
+                <option value="#111827">Ink</option>
+                <option value="#1f2937">Graphite</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="flex items-center gap-2 pt-2">
+            <button id="btn-generate" type="button" class="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold bg-slate-900 text-white hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-200 whitespace-nowrap">Update Preview</button>
+            <button id="btn-clear" type="button" class="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold bg-white border border-slate-200 hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-200 whitespace-nowrap">Clear</button>
+          </div>
+        </form>
+      </aside>
+
+      <section class="lg:col-span-8 xl:col-span-9">
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-base font-semibold">Preview</h2>
+            <div class="text-xs text-slate-500">Your sheet is saved automatically</div>
+          </div>
+          <div id="previewWrap" class="relative w-full overflow-auto rounded-xl border border-slate-100 bg-slate-50 p-3">
+            <div id="sheet" class="bg-white shadow-sm mx-auto"></div>
+          </div>
+          <div class="mt-3 flex items-center justify-end gap-2">
+            <button id="btn-print" class="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold bg-amber-500 text-white hover:bg-amber-600 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-200 whitespace-nowrap">Print</button>
+            <a href="index.html" class="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold bg-white border border-slate-200 hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-200 whitespace-nowrap">Back to landing</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="scripts/helpers.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>

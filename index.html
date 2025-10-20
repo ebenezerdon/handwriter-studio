@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Handwriter Studio - Create Handwriting Practice Sheets</title>
+  <meta name="description" content="Generate beautiful handwriting practice sheets for letters, words, and grids. Export to PDF. Free and fast.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Patrick+Hand:wght@400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="styles/main.css">
+  <style type="text/tailwindcss" data-teda="tailwind-apply">
+    @layer components {
+      .cta-btn { @apply inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold tracking-wide whitespace-nowrap transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2; }
+      .cta-primary { @apply bg-teal-600 text-white hover:bg-teal-700 focus:ring-teal-200; }
+      .cta-secondary { @apply bg-white text-slate-900 border border-slate-200 hover:bg-slate-50 focus:ring-slate-200; }
+      .pill { @apply inline-flex items-center rounded-full bg-amber-100 text-amber-800 px-3 py-1 text-xs font-semibold; }
+      .card { @apply bg-white/90 backdrop-blur-sm shadow-xl rounded-2xl p-6 border border-slate-100; }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900 selection:bg-amber-200 selection:text-slate-900">
+  <header class="relative z-10">
+    <nav class="mx-auto max-w-7xl px-6 py-5 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-2 group" aria-label="Handwriter Studio Home">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white font-black">H</span>
+        <span class="font-extrabold tracking-tight text-xl">Handwriter Studio</span>
+      </a>
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="app.html" class="cta-btn cta-secondary">Open App</a>
+        <a href="app.html" class="cta-btn cta-primary">Create a Sheet</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top" class="relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 -z-10">
+      <div class="absolute -top-24 left-1/2 -translate-x-1/2 h-[700px] w-[1000px] rotate-6 opacity-[0.08]" aria-hidden="true">
+        <div class="w-full h-full bg-[conic-gradient(at_30%_30%,_#0f172a_0deg,_#0891b2_90deg,_#0ea5e9_150deg,_#f59e0b_240deg,_#0f172a_360deg)] rounded-[60px]"></div>
+      </div>
+      <div class="absolute bottom-[-280px] right-[-180px] h-[520px] w-[520px] rounded-full bg-amber-200/40 blur-3xl"></div>
+      <div class="absolute top-[40%] left-[-180px] h-[380px] w-[380px] rounded-full bg-teal-200/40 blur-3xl"></div>
+    </div>
+
+    <section class="mx-auto max-w-5xl px-6 pt-16 pb-8 text-center">
+      <span class="pill">New • PDF export included</span>
+      <h1 class="mt-6 text-4xl sm:text-6xl md:text-7xl font-black leading-[1.05]"><span class="block">Generate handwriting</span><span class="block text-transparent bg-clip-text bg-gradient-to-b from-slate-900 to-slate-700">practice sheets</span> in seconds</h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg sm:text-xl text-slate-700">Build custom worksheets for letters, words, or grids. Beautiful guides, dotted tracing, and one-click PDF export. Designed for classrooms, therapists, and homeschoolers.</p>
+      <div class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <a href="app.html" class="cta-btn cta-primary w-full sm:w-auto">Start Creating</a>
+        <a href="#features" class="cta-btn cta-secondary w-full sm:w-auto">See How It Works</a>
+      </div>
+
+      <div class="relative mt-14">
+        <div class="mx-auto max-w-4xl card p-0">
+          <div class="border-b border-slate-100 px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <span class="h-3.5 w-3.5 rounded-full bg-red-400"></span>
+              <span class="h-3.5 w-3.5 rounded-full bg-amber-400"></span>
+              <span class="h-3.5 w-3.5 rounded-full bg-emerald-400"></span>
+            </div>
+            <div class="text-xs text-slate-500">Live Preview</div>
+          </div>
+          <div class="p-6">
+            <div class="aspect-[11/8.5] w-full rounded-xl bg-white border border-slate-200 relative overflow-hidden">
+              <div class="absolute inset-0 p-6">
+                <div class="h-full w-full bg-[repeating-linear-gradient(0deg,_transparent,_transparent_28px,_#cbd5e1_28px,_#cbd5e1_30px,_transparent_30px,_transparent_44px,_#cbd5e1_44px,_#cbd5e1_46px)] rounded-lg"></div>
+                <div class="absolute inset-0 p-8 flex items-start">
+                  <div class="inline-flex flex-col gap-3">
+                    <span class="text-slate-400 text-[44px] font-[\'Patrick Hand\',cursive] tracking-wide">a a a a a a</span>
+                    <span class="text-slate-400 text-[44px] font-[\'Patrick Hand\',cursive] tracking-wide">cat cat cat</span>
+                    <span class="text-slate-300 text-sm">Preview only. Build your own in the app.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="mx-auto max-w-6xl px-6 py-20">
+      <div class="grid gap-6 md:grid-cols-12">
+        <div class="md:col-span-7 card">
+          <h2 class="text-2xl font-bold">What you can create</h2>
+          <ul class="mt-4 space-y-3 text-slate-700">
+            <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-teal-500"></span><span>Primary three-line guides with dashed midlines and baseline alignment.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-amber-500"></span><span>Dotted or outlined tracing for letters and words with adjustable size.</span></li>
+            <li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-sky-500"></span><span>Square grid worksheets for precision and graph-style practice.</span></li>
+          </ul>
+          <div class="mt-6">
+            <a href="app.html" class="cta-btn cta-primary">Open the Builder</a>
+          </div>
+        </div>
+        <div class="md:col-span-5 card">
+          <h3 class="text-xl font-semibold">Why teachers love it</h3>
+          <div class="mt-4 space-y-3 text-slate-700">
+            <p>Fast to set up, flexible options, and exports to crystal-clear PDFs ready for print. No sign-in required.</p>
+            <p>Your settings are saved locally, so you can pick up where you left off any time.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 card">
+        <h3 class="text-xl font-semibold">Accessible by design</h3>
+        <p class="mt-3 text-slate-700">High contrast, keyboard navigable controls, and reduced-motion support ensure a smooth experience for everyone.</p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-6 pb-20">
+      <div class="card text-center">
+        <h3 class="text-2xl font-bold">Ready to make your first worksheet?</h3>
+        <p class="mt-2 text-slate-700">Pick letters or words, tweak the grid, and export to PDF in one click.</p>
+        <div class="mt-5">
+          <a href="app.html" class="cta-btn cta-primary">Create a Sheet</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200">
+    <div class="mx-auto max-w-7xl px-6 py-8 text-sm text-slate-600 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>&copy; <span id="year"></span> Handwriter Studio. All rights reserved.</p>
+      <p>Built with care for classrooms and creators.</p>
+    </div>
+  </footer>
+
+  <script>
+    $(function(){ $('#year').text(new Date().getFullYear()); });
+  </script>
+  <script src="scripts/helpers.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>
